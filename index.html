@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>拟南芥抗菌性探究</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+    body {
+      background: #f7f9fc;
+      color: #333;
+      scroll-behavior: smooth;
+    }
+    header {
+      background: #2c3e50;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    nav {
+      background: #34495e;
+      padding: 10px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    nav a {
+      color: white;
+      margin: 0 12px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    .project-wrapper {
+      display: flex;
+      max-width: 1100px;
+      margin: 30px auto;
+      padding: 0 20px;
+      gap: 20px;
+    }
+
+    .sidebar {
+      width: 220px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 20px;
+      position: sticky;
+      top: 100px;
+      height: fit-content;
+    }
+    .sidebar a {
+      display: block;
+      padding: 8px 10px;
+      margin: 4px 0;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .sidebar a.active {
+      background: #34495e;
+      color: white;
+    }
+
+    .project-content {
+      flex: 1;
+    }
+    .section {
+      background: white;
+      padding: 25px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #2c3e50;
+      color: white;
+      margin-top: 30px;
+    }
+    .table-container {
+  overflow-x: auto;
+  margin: 20px auto;
+  width: 800px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border: 1px solid #333;
+  font-family: Arial, sans-serif;
+}
+
+th, td {
+  border: 1px solid #333;
+  padding: 12px 15px;
+  text-align: center;
+}
+
+th {
+  background-color: #ddd;
+  font-weight: bold;
+}
+tbody tr:nth-child(even) {
+  background-color: #ddd;
+}
+.simple-carousel {
+  max-width: 800px; 
+  height: 400px;
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.hover {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer; 
+    }
+    .hover:hover {
+      transform: scale(1.2); 
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+  </style>
+</head>
+<body>
+
+<div id="app">
+  <header>
+    <h1>探究拟南芥抗菌性</h1>
+  </header>
+
+  <nav>
+    <a @click="show='home'">Home</a>
+    <a @click="show='project'">Wetlab</a>
+    <a @click="show='team'">Drylab</a>
+    <a @click="show='notebook'">Notebook</a>
+    <a @click="show='safety'">Summary</a>
+  </nav>
+
+
+  <div class="container" v-if="show === 'home'">
+    <div class="section">
+      <h2>研究背景</h2>
+      <p> 野生的拟南芥在世界上的地理分布广泛，可以适应多样的环境，有很多适应性的性状值得研究。<br>
+    拟南芥生长周期短，发育快，为自花授粉，是遗传学研究的常用材料。<br>
+因此，我们决定以江苏南京拟南芥种群为例，研究拟南芥野生种群是否在细菌抗性上存在差异。<br>
+</p>
+        <h2 style="margin-top: 20px">聚焦问题</h2>
+        <p>拟南芥种群对于丁香假单胞菌的细菌抗性</p>
+        <h2 style="margin-top: 20px">现实意义</h2>
+        <p>中国的拟南芥可以用于探究多种适应性表型的遗传机制，为被子植物的适应性演化提供更多的实验证据。<br>
+        研究拟南芥野生种群是否在细菌抗性方面存在差异。该研究有助于拓展我们对拟南芥适应性演化的认识。
+</p>
+    </div>
+    <div class="section">
+        <div>
+            <div>
+      <img src="freebee/图片1.png" alt="实验图片1" style="width: 200px;height: 300;float: left;margin-left: 60px;" class="hover">
+      <img src="freebee/图片2.png" alt="实验图片2" style="width: 200px;height: 300;margin-left: 95px;"class="hover">
+      <img src="freebee/图片3.png" alt="实验图片3" style="width: 200px;height: 275px;float: right;margin-right: 60px"class="hover">
+            </div>
+        </div>
+    </div>
+
+  </div>
+
+  <div v-if="show === 'project'">
+    <div class="project-wrapper">
+      <div class="sidebar">
+        <a @click="go('bg')" :class="{active: sub=='bg'}">理论框架</a>
+        <a @click="go('design')" :class="{active: sub=='design'}">实验设计</a>
+        <a @click="go('results')" :class="{active: sub=='results'}">实验结果</a>
+      </div>
+
+     
+      <div class="project-content">
+        <div id="bg" class="section">
+          <h2>实验研究对象基本概念</h2>
+          <p>拟南芥，典型的自交繁殖植物，在植物遗传研究中有领衔地位，<br>拟南芥生长的地理范围广，种类多样，非常有利于研究植物适应环境的问题。</p>
+          <h2 style="margin-top: 20px">实验研究基本原理</h2>
+          <p>在单位鲜重的叶片内，细菌量相同，而在培养皿中体外培养出的菌落数越多代表叶片内细菌越多。<br>所以用单位鲜重的菌落数量的对数值，体现该种群的抗病性</p>
+        </div>
+        <div id="design" class="section">
+          <h2>实验设计</h2>
+          <p>实验目的:探究拟南芥野生种群的细菌抗性</p>
+          <p style="margin-top: 10px">实验材料：江苏南京JSnj、Ra-0、Col-0三个种群的拟南芥、DC3000菌液、MgCl2溶液、培养皿、培养基、移液枪、离心机、离心管、分光光度计、医用注射器等。</p>
+        <p style="margin-top: 10px">实验操作： 1.运用分光光度计选择适宜浓度的菌液，再进行稀释。<br>
+		2.选取叶片，将菌液注入叶片中，使叶片几乎完全浸润到菌液，并用吸水纸将叶片表面的菌液擦干，继续培养。<br>
+		3.接菌7天后，分组称叶片鲜重<br>
+		4.研磨叶片，用10mol/L的MgCl溶液配成叶片浆液进行梯度稀释，选取-3梯度接种在培养基上<br>
+		5.观察记录菌落数量<br></p>
+        <p style="margin-top: 10px">数据分析:菌落数在一定程度上反映叶片内细菌数目。用单位鲜重的菌落数量的对数值，体现该种群的抗病性。</p>
+        </div>
+        <div id="results" class="section">
+          <h2>实验结果</h2>
+          <img src="freebee/拟南芥.png" alt="实验图片3" style="width: 800px;">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" v-if="show === 'team'">
+    <div class="section">
+        <h2>计算检验</h2>
+        <p>本操作旨在比较实验组和正负对照组的单位鲜重菌落数是否存在显著差异，从而判断江苏南京种群是否存在抗菌性，三组样本量均为7个。为方便计算，先取对数值，再采用独立样本t检验分析，结果显示如下图柱状图所示。表明组间差异不具有统计学意义。</p>
+    <img src ="freebee/QQ浏览器截图20260302185141.png" style="display: block; margin: 0 auto; width: 400px;">
+    </div>
+    
+  </div>
+  <div class="container" v-if="show === 'notebook'">
+   
+    <div class="section">
+        <div class="section">
+    <div class="section">
+  <h2 style="text-align: center; ">表1  Col-0</h2>
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>鲜重/g</th>
+          <th>菌落数</th>
+          <th>单位鲜重菌落数</th>
+          <th>对数值</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>0.04</td>
+          <td>1.00</td>
+          <td>555555.56</td>
+          <td>5.74</td>
+        </tr>
+        <tr>
+          <td>0.04</td>
+          <td>29.00</td>
+          <td>16111111.11</td>
+          <td>7.21</td>
+        </tr>
+        <tr>
+          <td>0.07</td>
+          <td>2.00</td>
+          <td>634920.63</td>
+          <td>5.80</td>
+        </tr>
+        <tr>
+          <td>0.04</td>
+          <td>3.00</td>
+          <td>1666666.67</td>
+          <td>6.22</td>
+        </tr>
+        <tr>
+          <td>0.05</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>#NUM!</td>
+        </tr>
+        <tr>
+          <td>0.05</td>
+          <td>2.00</td>
+          <td>888888.89</td>
+          <td>5.95</td>
+        </tr>
+        <tr>
+          <td>0.04</td>
+          <td>1.00</td>
+          <td>555555.56</td>
+          <td>5.74</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+  <h2 style="text-align: center; margin-bottom: 20px;">表2  Ra-0</h2>
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>鲜重/g</th>
+          <th>菌落数</th>
+          <th>单位鲜重菌落数</th>
+          <th>对数值</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>0.05</td>
+          <td>3.00</td>
+          <td>1333333.33</td>
+          <td>6.12</td>
+        </tr>
+        <tr>
+          <td>0.06</td>
+          <td>12.00</td>
+          <td>4444444.44</td>
+          <td>6.65</td>
+        </tr>
+        <tr>
+          <td>0.04</td>
+          <td>0.00</td>
+          <td>0.00</td>
+          <td>#NUM!</td>
+        </tr>
+        <tr>
+          <td>0.07</td>
+          <td>6.00</td>
+          <td>1904761.91</td>
+          <td>6.28</td>
+        </tr>
+        <tr>
+          <td>0.03</td>
+          <td>4.00</td>
+          <td>2962962.96</td>
+          <td>6.47</td>
+        </tr>
+        <tr>
+          <td>0.05</td>
+          <td>61.00</td>
+          <td>27111111.11</td>
+          <td>7.43</td>
+        </tr>
+        <tr>
+          <td>0.05</td>
+          <td>3.00</td>
+          <td>1333333.33</td>
+          <td>6.12</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+  <h2 style="text-align: center; margin-bottom: 20px;">表3  JSn j</h2>
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>鲜重/g</th>
+          <th>菌落数</th>
+          <th>单位鲜重菌落数</th>
+          <th>对数值</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>0.05</td>
+          <td>2.00</td>
+          <td>888888.89</td>
+          <td>5.95</td>
+        </tr>
+        <tr>
+          <td>0.03</td>
+          <td>1.00</td>
+          <td>740740.74</td>
+          <td>5.87</td>
+        </tr>
+        <tr>
+          <td>0.03</td>
+          <td>2.00</td>
+          <td>1481481.48</td>
+          <td>6.17</td>
+        </tr>
+        <tr>
+          <td>0.03</td>
+          <td>1.00</td>
+          <td>740740.74</td>
+          <td>5.87</td>
+        </tr>
+        <tr>
+          <td>0.02</td>
+          <td>10.00</td>
+          <td>11111111.11</td>
+          <td>7.05</td>
+        </tr>
+        <tr>
+          <td>0.02</td>
+          <td>2.00</td>
+          <td>2222222.22</td>
+          <td>6.35</td>
+        </tr>
+        <tr>
+          <td>0.05</td>
+          <td>2.00</td>
+          <td>888888.89</td>
+          <td>5.95</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+  </div>
+  <div class="container" v-if="show === 'safety'">
+    <div class="section">
+        <h2>实验反思</h2>
+        <p>1.DC3000注射菌液的选择
+DC3000菌液浓度测定值不准确。
+在从对照管内吸取菌液时，吸取原菌液10.5μL，由于吸取液体较少不易观察，可能吸取的菌液体积有误差。
+</p>
+        <p style="margin-top: 10px">2.拟南芥的细菌接种
+用注射器吸取菌液接种前未将菌液摇匀；
+Ra-0拟南芥叶片较大，注射细菌时叶片上可能有较多细菌未被完全擦除；
+JSnj和Col-0种群叶片较小，注射时未将整个叶片注射完全。
+</p>
+        <p style="margin-top: 10px">3.拟南芥的叶片研磨
+叶片研磨时间不一；
+研磨时间较长，离心管有微微发热现象，在此过程中可能杀死了部分细菌。</p>
+        <p style="margin-top: 10px">4.梯度稀释和点样
+无菌操作不规范；点样时有两个液滴出现了交融现象，但根据最后菌落数据显示无明显影响。</p>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 YYDS</p>
+  </footer>
+</div>
+
+<script>
+new Vue({
+  el: '#app',
+  data: {
+    show: 'home',  
+    sub: 'bg'    
+  },
+  methods: {
+    go(id) {
+      this.sub = id
+      document.getElementById(id).scrollIntoView({
+        behavior: 'smooth'
+      })
+    }
+  }
+})
+</script>
+</body>
+</html>
